@@ -1,4 +1,4 @@
-package com.plugin;
+package com.avishayhajbi.notificationplugin;
 //notification
 import android.app.Notification;
 import android.app.NotificationManager;
