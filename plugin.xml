@@ -21,7 +21,7 @@
 
 <asset src="www/notification.js" target="js/notification.js" /> 
    <js-module src="www/notification.js" name="notification">
-      <clobbers target="notification" />
+      <clobbers target="js/notification" />
    </js-module>
 
    <!-- android -->
