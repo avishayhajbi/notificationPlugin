@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 
 
-public class HelloPlugin extends CordovaPlugin{
+public class NotificationPlugin extends CordovaPlugin{
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -57,7 +57,7 @@ public class HelloPlugin extends CordovaPlugin{
         int taskId = id;
         String notificationText = message;
 
-        Intent intent = new Intent(context,HelloPlugin.class);
+        Intent intent = new Intent(context,NotificationPlugin.class);
         intent.setAction(""+taskId);
         intent.putExtra("taskId", id);
         intent.putExtra("notificationText", message );
