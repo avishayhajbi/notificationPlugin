@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import java.io.InputStream;
 
 
 public class NotificationPlugin extends CordovaPlugin{
@@ -84,5 +85,12 @@ public class NotificationPlugin extends CordovaPlugin{
         notification.defaults |= Notification.DEFAULT_VIBRATE;
         notificationManager.notify(taskId, notification); // to execute
     }
- 
+	private Bitmap getIconFromUri (Uri uri) throws IOException {
+        Bitmap bmp = null;
+          
+        InputStream input = cordova.getActivity().getPackageName().getContentResolver().openInputStream(uri);
+        bmp = BitmapFactory.decodeStream(input);
+
+        return bmp;
+    }
 }
