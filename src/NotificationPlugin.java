@@ -24,7 +24,7 @@ import org.json.JSONException;
 //json parse
 import org.json.JSONObject;
 //icon
-import android.graphics.Bitmap;
+/*import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import java.io.InputStream;
@@ -32,7 +32,7 @@ import android.content.res.Resources;
 import java.io.IOException;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationCompat.Builder;*/
 
 public class NotificationPlugin extends CordovaPlugin{
 
@@ -72,7 +72,7 @@ public class NotificationPlugin extends CordovaPlugin{
         intent.putExtra("notificationText", message );
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		int icon = cordova.getActivity().getResources().getIdentifier(image, "drawable", cordova.getActivity().getPackageName());
-		Notification notification = new Notification(bmp, notificationText ,System.currentTimeMillis());
+		Notification notification = new Notification(icon, notificationText ,System.currentTimeMillis());
 		/*Bitmap bmp = null;
 		Uri iconUri = null;
 		try{
@@ -101,7 +101,7 @@ public class NotificationPlugin extends CordovaPlugin{
         notification.defaults |= Notification.DEFAULT_VIBRATE;
         notificationManager.notify(taskId, notification); // to execute
     }
-	private Bitmap getIconFromUri (Uri uri) throws IOException {
+	/*private Bitmap getIconFromUri (Uri uri) throws IOException {
         Bitmap bmp = null;
           
         InputStream input = cordova.getActivity().getApplicationContext().getContentResolver().openInputStream(uri);
@@ -137,5 +137,5 @@ public class NotificationPlugin extends CordovaPlugin{
         } catch (Exception e) {}
 
         return icon;
-    }
+    }*/
 }
