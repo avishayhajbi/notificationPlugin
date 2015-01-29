@@ -71,19 +71,19 @@ public class NotificationPlugin extends CordovaPlugin{
         intent.putExtra("taskId", id);
         intent.putExtra("notificationText", message );
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		//int icon = cordova.getActivity().getResources().getIdentifier(image, "drawable", cordova.getActivity().getPackageName());
-		//Notification notification = new Notification(bmp, notificationText ,System.currentTimeMillis());
-		Bitmap bmp = null;
+		int icon = cordova.getActivity().getResources().getIdentifier(image, "drawable", cordova.getActivity().getPackageName());
+		Notification notification = new Notification(bmp, notificationText ,System.currentTimeMillis());
+		/*Bitmap bmp = null;
 		Uri iconUri = null;
 		try{
 			iconUri = Uri.parse(image);
 			bmp = getIconFromUri(iconUri);
 		} catch (Exception e){
 			bmp = getIconFromRes(image);
-		}
+		}*/
         PendingIntent pendingIntent = PendingIntent.getActivity(context, taskId, intent,  0);
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Builder notification = new NotificationCompat.Builder(context)
+       /* Builder notification = new NotificationCompat.Builder(context)
             .setDefaults(0) // Do not inherit any defaults
             .setContentTitle(message)
             .setContentText(title)
@@ -94,7 +94,7 @@ public class NotificationPlugin extends CordovaPlugin{
             //.setAutoCancel(options.getAutoCancel())
             //.setOngoing(options.getOngoing())
             //.setLights(options.getColor(), 500, 500)
-            //.setDeleteIntent(dpi);
+            //.setDeleteIntent(dpi);*/
         notification.setLatestEventInfo( context,title, notificationText, pendingIntent);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
         notification.defaults |= Notification.DEFAULT_SOUND;
