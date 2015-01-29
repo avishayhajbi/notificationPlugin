@@ -23,7 +23,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 //json parse
 import org.json.JSONObject;
-
+//icon
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 
 
 public class NotificationPlugin extends CordovaPlugin{
@@ -64,10 +67,17 @@ public class NotificationPlugin extends CordovaPlugin{
         intent.putExtra("notificationText", message );
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		int icon = cordova.getActivity().getResources().getIdentifier(image, "drawable", cordova.getActivity().getPackageName());
-
+		Bitmap bmp = null;
+		Uri iconUri = null;
+		try{
+			iconUri = Uri.parse(image);
+			bmp = getIconFromUri(iconUri);
+		} catch (Exception e){
+			bmp = getIconFromRes(icon);
+		}
         PendingIntent pendingIntent = PendingIntent.getActivity(context, taskId, intent,  0);
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification(icon, notificationText ,System.currentTimeMillis());
+        Notification notification = new Notification(bmp, notificationText ,System.currentTimeMillis());
         notification.setLatestEventInfo( context,title, notificationText, pendingIntent);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
         notification.defaults |= Notification.DEFAULT_SOUND;
