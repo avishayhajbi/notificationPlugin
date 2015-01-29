@@ -28,7 +28,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import java.io.InputStream;
-
+import android.content.res.Resources;
 
 public class NotificationPlugin extends CordovaPlugin{
 
@@ -74,7 +74,7 @@ public class NotificationPlugin extends CordovaPlugin{
 			iconUri = Uri.parse(image);
 			bmp = getIconFromUri(iconUri);
 		} catch (Exception e){
-			bmp = getIconFromRes(icon);
+			bmp = getIconFromRes(image);
 		}
         PendingIntent pendingIntent = PendingIntent.getActivity(context, taskId, intent,  0);
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -88,7 +88,7 @@ public class NotificationPlugin extends CordovaPlugin{
 	private Bitmap getIconFromUri (Uri uri) throws IOException {
         Bitmap bmp = null;
           
-        InputStream input = cordova.getActivity().getPackageName().getContentResolver().openInputStream(uri);
+        InputStream input = getContentResolver().openInputStream(uri);
         bmp = BitmapFactory.decodeStream(input);
 
         return bmp;
