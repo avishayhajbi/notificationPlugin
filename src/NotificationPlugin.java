@@ -89,7 +89,7 @@ public class NotificationPlugin extends CordovaPlugin{
             .setContentText(title)
             .setNumber(id)
             .setTicker(message
-            .setSmallIcon(bmp);
+            .setLargeIcon(bmp);
             //.setLargeIcon(options.getIcon())
             //.setAutoCancel(options.getAutoCancel())
             //.setOngoing(options.getOngoing())
