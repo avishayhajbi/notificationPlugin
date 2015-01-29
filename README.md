@@ -6,7 +6,8 @@ cordova plugin
  str={
     id:new Date().getTime(),
     title:"title",
-    description:"description"
+    description:"description",
+	image:"icon"
 };
-window.notificationFunc(str);
+window.notification(str);
 

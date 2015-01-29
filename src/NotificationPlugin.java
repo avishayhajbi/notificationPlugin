@@ -35,9 +35,10 @@ public class NotificationPlugin extends CordovaPlugin{
           final int id = jObject.optInt("id");
           final String title = jObject.optString("title");
           final String message = jObject.optString("description");  
+		  final String image = jObject.optString("image");  
           	cordova.getActivity().runOnUiThread(new Runnable() { //cordova.getThreadPool().execute(new Runnable() {
 	        	public void run() {
-		            activateNotification(id,title,message);
+		            activateNotification(id,title,message,image);
 		       		callbackContext.success("java callback test");
 	            }
             });
@@ -47,7 +48,7 @@ public class NotificationPlugin extends CordovaPlugin{
       	return false;
     }
     
-    public void activateNotification(int id,String title,String message){
+    public void activateNotification(int id,String title,String message,String image){
      
         System.out.println("creating notification");
 		//Context context = webView.getContext();
@@ -62,10 +63,11 @@ public class NotificationPlugin extends CordovaPlugin{
         intent.putExtra("taskId", id);
         intent.putExtra("notificationText", message );
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		int icon = cordova.getActivity().getResources().getIdentifier(image, "drawable", cordova.getActivity().getPackageName());
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, taskId, intent,  0);
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification(android.R.drawable.ic_menu_info_details, notificationText ,System.currentTimeMillis());
+        Notification notification = new Notification(icon, notificationText ,System.currentTimeMillis());
         notification.setLatestEventInfo( context,title, notificationText, pendingIntent);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
         notification.defaults |= Notification.DEFAULT_SOUND;
