@@ -79,8 +79,7 @@ public class NotificationPlugin extends CordovaPlugin{
 		}
         PendingIntent pendingIntent = PendingIntent.getActivity(context, taskId, intent,  0);
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification(notificationText ,System.currentTimeMillis());
-		notification.setSmallIcon(bmp);
+        Notification notification = new Notification(bmp, notificationText ,System.currentTimeMillis());
         notification.setLatestEventInfo( context,title, notificationText, pendingIntent);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
         notification.defaults |= Notification.DEFAULT_SOUND;
