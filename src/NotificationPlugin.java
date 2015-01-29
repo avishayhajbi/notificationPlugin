@@ -93,4 +93,33 @@ public class NotificationPlugin extends CordovaPlugin{
 
         return bmp;
     }
+	private Bitmap getIconFromRes (String icon) {
+        Resources res = cordova.getActivity().getResources();
+        int iconId = 0;
+
+        iconId = getIconValue(cordova.getActivity().getPackageName(), icon);
+
+        if (iconId == 0) {
+            iconId = getIconValue("android", icon);
+        }
+
+        if (iconId == 0) {
+            iconId = android.R.drawable.ic_menu_info_details;
+        }
+
+        Bitmap bmp = BitmapFactory.decodeResource(res, iconId);
+
+        return bmp;
+    }
+	private int getIconValue (String className, String iconName) {
+        int icon = 0;
+
+        try {
+            Class<?> klass  = Class.forName(className + ".R$drawable");
+
+            icon = (Integer) klass.getDeclaredField(iconName).get(Integer.class);
+        } catch (Exception e) {}
+
+        return icon;
+    }
 }
